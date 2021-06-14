@@ -8,7 +8,7 @@ Created on Mon Jun 14 09:10:54 2021
 balance = int(input('balance = ')) #type the initial balance
 monthlyPaymentRate = float(input('monthlyPaymentRate = ')) #type the minimal monthly rate
 annualInterestRate = float(input('annualInterestRate = ')) #type the annual interest rate
-def Remaining_balance(balance, monthlyPaymentRate, annualInterestRate):
+def Remaining_balance_1(balance, monthlyPaymentRate, annualInterestRate):
     '''
     Unpaid balance = b0 - b0*mP = b0 * (1-mP)
     I0 = aP/12 * unpaid balance = b0 * (1-mP) * aP/12
@@ -23,5 +23,7 @@ def Remaining_balance(balance, monthlyPaymentRate, annualInterestRate):
         n += 1
     Rb = round(balance, 2) #following the problem set requirement, we need to round our results at the 0.01 place
     return Rb #return our function
-ans = Remaining_balance(balance, monthlyPaymentRate, annualInterestRate)
+ans = Remaining_balance_1(balance, monthlyPaymentRate, annualInterestRate)
 print('Remaining balance: ', str(ans)) #print the remaining balance
+
+
