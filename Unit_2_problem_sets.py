@@ -49,5 +49,9 @@ def payoff_inteterest(annualInterestRate, p):
         POI = (1 + annualInterestRate/12) ** (p-1)
         return POI + payoff_inteterest(annualInterestRate, p-1)
 fixed_monthly_payment = total_balance(balance, annualInterestRate) // payoff_inteterest(annualInterestRate, 12)
-print('Lowest Payment: ' + str(fixed_monthly_payment))
+if fixed_monthly_payment < 10.0:
+    print('Lowest Payment: ' + str(10))
+else:
+    fixed_monthly_payment = round(fixed_monthly_payment, -1)
+    print('Lowest Payment: ' + str(fixed_monthly_payment))
 
