@@ -19,11 +19,35 @@ def Remaining_balance_1(balance, monthlyPaymentRate, annualInterestRate):
     '''
     n = 1 
     while n <= 12: #using while looping to multiply (1-mP)*(1+P/12) 12 times
-        balance *= (1-monthlyPaymentRate) * (1+annualInterestRate/12.0)
+        balance *= (1-monthlyPaymentRate) * (1+annualInterestRate/12)
         n += 1
     Rb = round(balance, 2) #following the problem set requirement, we need to round our results at the 0.01 place
     return Rb #return our function
 ans = Remaining_balance_1(balance, monthlyPaymentRate, annualInterestRate)
 print('Remaining balance: ', str(ans)) #print the remaining balance
 
+
+def total_balance(balance, annualInterestRate):
+    '''
+    Total balance = balance * (1+aP/12)^12
+    '''
+    o = 1
+    while o <= 12:
+        balance *= (1+annualInterestRate/12)
+        o += 1
+    total_balance = balance
+    return total_balance
+def payoff_inteterest(annualInterestRate, p):
+    '''
+    The first payoff will have the compounding interest p-1 times, the second one\
+        will have p-2 times, ..., and the final one will not have interest
+    '''
+    POI = 0
+    if p == 1:
+        return 1
+    else:
+        POI = (1 + annualInterestRate/12) ** (p-1)
+        return POI + payoff_inteterest(annualInterestRate, p-1)
+fixed_monthly_payment = total_balance(balance, annualInterestRate) // payoff_inteterest(annualInterestRate, 12)
+print('Lowest Payment: ' + str(fixed_monthly_payment))
 
