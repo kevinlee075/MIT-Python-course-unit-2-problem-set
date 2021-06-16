@@ -48,7 +48,7 @@ def payoff_inteterest(annualInterestRate, p):
     else:
         POI = (1 + annualInterestRate/12) ** (p-1)
         return POI + payoff_inteterest(annualInterestRate, p-1)
-fixed_monthly_payment = total_balance(balance, annualInterestRate) / payoff_inteterest(annualInterestRate, 12)
+fixed_monthly_payment = total_balance(balance, annualInterestRate) // payoff_inteterest(annualInterestRate, 12)
 #借錢含滾利＝還錢含滾利
 if fixed_monthly_payment < 10.0: #The requirement says the answer should be a multiple of 10.
 #If the answer is less than 10, I should print 10
@@ -56,6 +56,26 @@ if fixed_monthly_payment < 10.0: #The requirement says the answer should be a mu
 else: #round to 10
     fixed_monthly_payment = round(fixed_monthly_payment, -1)
     print('Lowest Payment: ' + str(fixed_monthly_payment))
+    
+#Another answer for problem 2:
+initial_balance = int(input('balance = ')) #type the initial balance
+annualInterestRate = float(input('annualInterestRate = ')) #type the annual interest rate
+balance = initial_balance #Balance is assigned to the initial one
+payment = 0 #initial payment is 0
+def monthlyinterest():
+    '''
+    monthly interest = unpaid balance * monthly interest rate
+    '''
+    return (balance - payment) * (annualInterestRate/12)
+while balance > 0: #when balance is greater than 0, start to loop
+    for mo in range(12): #looping 12 times (one year) to find what's the final balance
+        balance = balance - payment + monthlyinterest()
+    if balance > 0: #'balance > 0' means the payment is too low
+        payment += 10 #examine the next multiple of 10
+        balance = initial_balance #back to initial balance for the loop
+    elif balance <= 0: #If the balance starts to become minus, stop the loop
+        break
+print('lowest interest: ' + str(payment)) #print the final answer
     
     
 initial_balance = int(input('balance = ')) #type the initial balance
