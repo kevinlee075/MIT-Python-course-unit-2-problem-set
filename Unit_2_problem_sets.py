@@ -72,12 +72,13 @@ while balance > 0:
         balance = balance - payment + monthlyinterest()
     if balance < 0:
         upperbound = payment
+        payment = (upperbound + lowerbound)/2
         balance = initial_balance
     elif balance > 0:
         lowerbound = payment
+        payment = (upperbound + lowerbound)/2
         balance = initial_balance
     else:
         break
-    payment = (upperbound + lowerbound)/2
 print('lowest interest: ' + str(payment))
 
