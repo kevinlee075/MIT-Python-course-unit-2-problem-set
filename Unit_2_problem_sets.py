@@ -54,4 +54,24 @@ if fixed_monthly_payment < 10.0:
 else:
     fixed_monthly_payment = round(fixed_monthly_payment, -1)
     print('Lowest Payment: ' + str(fixed_monthly_payment))
+    
+    
+initial_balance = int(input('balance = ')) #type the initial balance
+annualInterestRate = float(input('annualInterestRate = ')) #type the annual interest rate
+balance = initial_balance
+lowest_payment = 0
+def monthlyinterest():
+    '''
+    monthly interest = unpaid balance * monthly interest rate
+    '''
+    return (balance -lowest_payment) * (annualInterestRate/12)
+while balance > 0:
+    for mo in range(12):
+        balance = balance - lowest_payment + monthlyinterest()
+    if balance > 0:
+        lowest_payment += 10
+        balance = initial_balance
+    elif balance <= 0:
+        break
+print('lowest interest: ' + str(lowest_payment))
 
